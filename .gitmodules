@@ -1,0 +1,42 @@
+[submodule "satellites/foundation-models/llm-unify"]
+	path = satellites/foundation-models/llm-unify
+	url = git@github.com:hyperpolymath/llm-unify.git
+[submodule "satellites/foundation-models/llm-unify-core"]
+	path = satellites/foundation-models/llm-unify-core
+	url = git@github.com:hyperpolymath/llm-unify-core.git
+[submodule "satellites/foundation-models/llm-antidote"]
+	path = satellites/foundation-models/llm-antidote
+	url = git@github.com:hyperpolymath/llm-antidote.git
+[submodule "satellites/foundation-models/patallm-gallery"]
+	path = satellites/foundation-models/patallm-gallery
+	url = git@github.com:hyperpolymath/patallm-gallery.git
+[submodule "satellites/agentic/agentic-scm"]
+	path = satellites/agentic/agentic-scm
+	url = git@github.com:hyperpolymath/agentic-scm.git
+[submodule "satellites/agentic/conative-gating"]
+	path = satellites/agentic/conative-gating
+	url = git@github.com:hyperpolymath/conative-gating.git
+[submodule "satellites/agentic/elegant-state"]
+	path = satellites/agentic/elegant-state
+	url = git@github.com:hyperpolymath/elegant-state.git
+[submodule "satellites/neurosymbolic/neurosym-scm"]
+	path = satellites/neurosymbolic/neurosym-scm
+	url = git@github.com:hyperpolymath/neurosym-scm.git
+[submodule "satellites/neurosymbolic/echidna"]
+	path = satellites/neurosymbolic/echidna
+	url = git@github.com:hyperpolymath/echidna.git
+[submodule "satellites/neurosymbolic/neurophone"]
+	path = satellites/neurosymbolic/neurophone
+	url = git@github.com:hyperpolymath/neurophone.git
+[submodule "satellites/neurosymbolic/esn"]
+	path = satellites/neurosymbolic/esn
+	url = git@github.com:hyperpolymath/esn.git
+[submodule "satellites/neurosymbolic/lsm"]
+	path = satellites/neurosymbolic/lsm
+	url = git@github.com:hyperpolymath/lsm.git
+[submodule "satellites/neurosymbolic/disinfo-nesy-detector"]
+	path = satellites/neurosymbolic/disinfo-nesy-detector
+	url = git@github.com:hyperpolymath/disinfo-nesy-detector.git
+[submodule "satellites/neurosymbolic/zotero-nesy"]
+	path = satellites/neurosymbolic/zotero-nesy
+	url = git@github.com:hyperpolymath/zotero-nesy.git

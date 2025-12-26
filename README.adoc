@@ -1,0 +1,195 @@
+// SPDX-License-Identifier: MIT AND Palimpsest-0.8
+// SPDX-FileCopyrightText: 2024-2025 hyperpolymath
+
+= Neural Foundations
+:author: hyperpolymath
+:revnumber: 0.1.0
+:revdate: 2025-12-26
+:toc: left
+:toclevels: 3
+:icons: font
+:source-highlighter: rouge
+
+image:https://img.shields.io/badge/RSR-Gold-ffd700[RSR Gold]
+image:https://img.shields.io/badge/CCCP-Certified-c41e3a[CCCP Certified]
+
+== What is Neural Foundations?
+
+*Neural Foundations* is the primary repository for AI and neural computing *core technologies*—the fundamental building blocks, not their applications.
+
+This repository organizes projects that advance the state of:
+
+* *Foundation Models* — LLM infrastructure, conversation management, semantic primitives
+* *Agentic Systems* — Multi-agent orchestration, AI control mechanisms, constraint architectures
+* *Neurosymbolic* — Hybrid neural-symbolic systems, spiking networks, reservoir computing
+
+== Philosophy: Technologies, Not Applications
+
+This ecosystem focuses on the *technologies themselves*, not their application to other domains.
+
+[cols="1,1"]
+|===
+| Belongs Here | Belongs Elsewhere
+
+| LLM conversation unification
+| LLM-powered code verification (→ poly-mcps)
+
+| Multi-agent orchestration patterns
+| AI-powered git automation (→ oikos)
+
+| Echo State Network implementations
+| AI for content moderation (→ application-specific)
+
+| Neurosymbolic theorem proving
+| AI-enhanced documentation (→ application-specific)
+|===
+
+== Satellite Structure
+
+[source]
+----
+neural-foundations/
+├── satellites/
+│   ├── foundation-models/    # LLM infrastructure & primitives
+│   │   ├── llm-unify/        # Unified LLM conversation interface
+│   │   ├── llm-unify-core/   # Core types for LLM management
+│   │   ├── llm-antidote/     # Semantic reset artifacts
+│   │   └── patallm-gallery/  # LLM pattern library
+│   │
+│   ├── agentic/              # Multi-agent & AI control
+│   │   ├── agentic-scm/      # Agentic architecture patterns
+│   │   ├── conative-gating/  # AI controlling AI
+│   │   └── elegant-state/    # Multi-agent state orchestration
+│   │
+│   └── neurosymbolic/        # Hybrid neural-symbolic systems
+│       ├── neurosym-scm/     # Neurosymbolic core patterns
+│       ├── echidna/          # Theorem proving platform
+│       ├── neurophone/       # Mobile spiking NN + LLM
+│       ├── esn/              # Echo State Networks
+│       ├── lsm/              # Liquid State Machines
+│       ├── disinfo-nesy-detector/  # Detection systems
+│       └── zotero-nesy/      # Knowledge extraction
+----
+
+== Foundation Models
+
+Repositories focused on Large Language Model infrastructure and conversation management.
+
+=== llm-unify
+
+A unified interface for managing conversations across multiple LLM platforms.
+Abstracts provider differences (OpenAI, Anthropic, Google) into a consistent API.
+
+=== llm-unify-core
+
+Core types for managing LLM conversations across multiple providers (ChatGPT, Claude, Gemini, Copilot).
+Shared type definitions used by llm-unify and other tools.
+
+=== llm-antidote
+
+Universal semantic reset artifacts for language model context management.
+Techniques for clearing, resetting, or redirecting LLM context.
+
+=== patallm-gallery
+
+Gallery of LLM patterns and implementations.
+Reference architectures and proven patterns for LLM integration.
+
+== Agentic Systems
+
+Repositories focused on multi-agent orchestration and AI control mechanisms.
+
+=== agentic-scm
+
+Agentic architecture patterns in SCM format.
+Machine-readable definitions for agent behaviors and interactions.
+
+=== conative-gating
+
+Controlling AI with AI. Introduces a second model trained with inverted incentives—rewarded for blocking, suspicious by default, adversarial to the LLM's proposals.
+Uses metaphors from human constraint mechanisms.
+
+=== elegant-state
+
+Local-first state graph for multi-agent orchestration.
+Enables agents to coordinate without centralized state management.
+
+== Neurosymbolic Systems
+
+Repositories focused on hybrid neural-symbolic computing, including spiking neural networks and reservoir computing.
+
+=== neurosym-scm
+
+Core patterns and definitions for neurosymbolic systems in SCM format.
+
+=== echidna
+
+*Extensible Cognitive Hybrid Intelligence for Deductive Neural Assistance.*
+
+A neurosymbolic theorem proving platform that transforms Quill (Agda-only neural solver) into a universal multi-prover system with:
+
+* Aspect tagging
+* OpenCyc integration
+* DeepProbLog probabilistic logic
+
+=== neurophone
+
+Complete Android application for neurosymbolic AI on mobile devices.
+Combines spiking neural networks with large language models for advanced on-device intelligence.
+
+=== esn
+
+A Rust implementation of Echo State Networks (reservoir computing) for time series prediction and classification.
+
+=== lsm
+
+A Rust implementation of Liquid State Machines (spiking neural network reservoirs) for temporal pattern recognition.
+
+=== disinfo-nesy-detector
+
+Disinformation and AI-generated content detection using neurosymbolic techniques.
+
+=== zotero-nesy
+
+_"What can be said at all can be said clearly."_ — Wittgenstein, Tractatus Logico-Philosophicus
+
+Knowledge extraction and semantic analysis for academic research.
+
+== Relationship to Other Primaries
+
+[cols="1,2"]
+|===
+| Primary | Relationship
+
+| *poly-mcps*
+| Applications of LLM protocols—MCP servers use neural-foundations technologies
+
+| *rhodium-standard-repositories*
+| RSR compliance applies to all neural-foundations satellites
+
+| *oikos*
+| AI-powered git analysis uses neural-foundations for its AI capabilities
+
+| *cccp*
+| Language policy governs implementation languages (Rust preferred for ESN/LSM)
+|===
+
+== Contributing
+
+Contributions should focus on *core technologies*, not applications:
+
+1. New neural network architectures
+2. LLM conversation primitives
+3. Agent coordination patterns
+4. Neurosymbolic reasoning techniques
+
+For AI *applications*, contribute to the appropriate domain-specific repository.
+
+== License
+
+MIT + Palimpsest-0.8
+
+---
+
+_"The distinction between technology and application matters. Build the foundations; let others build the applications."_
+

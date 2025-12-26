@@ -1,0 +1,53 @@
+# CLAUDE.md - AI Assistant Instructions
+
+## Language Policy (Hyperpolymath Standard)
+
+### ALLOWED Languages & Tools
+
+| Language/Tool | Use Case | Notes |
+|---------------|----------|-------|
+| **ReScript** | Primary application code | Compiles to JS, type-safe |
+| **Deno** | Runtime & package management | Replaces Node/npm/bun |
+| **Rust** | Performance-critical, systems, WASM | Preferred for CLI tools |
+| **Tauri 2.0+** | Mobile apps (iOS/Android) | Rust backend + web UI |
+| **Dioxus** | Mobile apps (native UI) | Pure Rust, React-like |
+| **Gleam** | Backend services | Runs on BEAM or compiles to JS |
+| **Bash/POSIX Shell** | Scripts, automation | Keep minimal |
+| **JavaScript** | Only where ReScript cannot | MCP protocol glue, Deno APIs |
+| **Python** | SaltStack only | No other Python permitted |
+| **Nickel** | Configuration language | For complex configs |
+| **Guile Scheme** | State/meta files | STATE.scm, META.scm, ECOSYSTEM.scm |
+| **Julia** | Batch scripts, data processing | Per RSR |
+| **OCaml** | AffineScript compiler | Language-specific |
+| **Ada** | Safety-critical systems | Where required |
+
+### BANNED - Do Not Use
+
+| Banned | Replacement |
+|--------|-------------|
+| TypeScript | ReScript |
+| Node.js | Deno |
+| npm | Deno |
+| Bun | Deno |
+| pnpm/yarn | Deno |
+| Go | Rust |
+| Python (general) | ReScript/Rust |
+| Java/Kotlin | Rust/Tauri/Dioxus |
+| Swift | Tauri/Dioxus |
+| React Native | Tauri/Dioxus |
+| Flutter/Dart | Tauri/Dioxus |
+
+### Neural Foundations Specific
+
+For neural network implementations:
+- **Rust** preferred for ESN, LSM, and performance-critical neural code
+- **ReScript** for web-based visualizations and UIs
+- **Deno** for orchestration and API servers
+
+### Security Requirements
+
+- No MD5/SHA1 for security (use SHA256+)
+- HTTPS only (no HTTP URLs)
+- No hardcoded secrets
+- SHA-pinned dependencies
+- SPDX license headers on all files
