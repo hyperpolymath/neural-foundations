@@ -1,0 +1,49 @@
+# SPDX-License-Identifier: PMPL-1.0-or-later
+# Copyright (c) 2026 Jonathan D.A. Jewell (hyperpolymath) <j.d.a.jewell@open.ac.uk>
+#
+# End-to-end test suite for llm-unify (neural-foundations satellite).
+# Tests the full import→search→backup→restore pipeline.
+
+name: E2E Tests — llm-unify
+
+on:
+  push:
+    branches: [main, master, develop]
+    paths:
+      - 'satellites/foundation-models/llm-unify/**'
+      - '.github/workflows/e2e.yml'
+  pull_request:
+    branches: [main, master]
+    paths:
+      - 'satellites/foundation-models/llm-unify/**'
+  workflow_dispatch:
+
+permissions: read-all
+
+concurrency:
+  group: e2e-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  e2e-llm-unify:
+    name: E2E — llm-unify Import/Search/Backup Pipeline
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5  # v4
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@4be9e76fd7c4901c61fb841f559994984270fce7  # stable
+
+      - name: Rust cache
+        uses: Swatinem/rust-cache@779680da715d629ac1d338a641029a2f4372abb5  # v2
+        with:
+          workspaces: satellites/foundation-models/llm-unify
+
+      - name: Build llm-unify
+        run: cargo build --release --manifest-path satellites/foundation-models/llm-unify/Cargo.toml
+
+      - name: Run E2E test suite
+        run: bash satellites/foundation-models/llm-unify/tests/e2e_test.sh
