@@ -1,24 +1,239 @@
 // SPDX-License-Identifier: PMPL-1.0-or-later
+// Copyright (c) 2026 Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
 = Neural Foundations — Show Me The Receipts
 :toc:
+:toclevels: 3
 :icons: font
+:author: Jonathan D.A. Jewell
 
-The README makes claims. This file backs them up.
+The README makes claims. This file backs them up with structural detail,
+code paths, and honest caveats sufficient for an external reviewer to know
+where each satellite lives, what it implements, and how the boundaries are
+drawn between this repo and the application-level repos that consume it.
+
+NOTE: License note — this repo declares `MPL-2.0-or-later` for
+platform/tooling compatibility (some satellite dependencies require an
+OSI-approved licence). The PMPL text is provided in `license/PMPL-1.0.txt`;
+PMPL is the preferred licence where technically possible.
+
+== Claim 1: "Core technologies, not applications — LLM infrastructure, agentic systems, neurosymbolic computing"
 
 [quote, README]
 ____
-This project must declare **MPL-2.0-or-later** for platform/tooling compatibility.
+Neural Foundations is the primary repository for AI and neural computing core
+technologies — the fundamental building blocks, not their applications.
 ____
+
+=== How it works
+
+The repo is a hub-and-satellite structure. The hub (this repo) contains the
+topology map, governance, and the shared git-submodule wiring. The satellites
+are independent repos cloned into `satellites/`:
+
+[source]
+----
+satellites/
+├── foundation-models/   # LLM infrastructure
+│   ├── llm-antidote/    # Semantic reset artifacts
+│   ├── llm-unify/       # Unified LLM conversation interface
+│   ├── llm-unify-core/  # Core types for multi-provider management
+│   └── patallm-gallery/ # LLM pattern library
+├── agentic/             # Multi-agent orchestration
+│   ├── agentic-scm/     # Machine-readable agent behaviour patterns
+│   ├── conative-gating/ # AI-controlling-AI with adversarial incentives
+│   └── elegant-state/   # Local-first multi-agent state graph
+└── neurosymbolic/       # Hybrid neural-symbolic systems
+    ├── neurosym-scm/    # Core neurosymbolic pattern definitions
+    ├── echidna/         # Multi-prover theorem proving platform
+    ├── neurophone/      # Android spiking-NN + LLM app
+    ├── esn/             # Echo State Networks (Rust)
+    ├── lsm/             # Liquid State Machines (Rust)
+    ├── disinfo-nesy-detector/ # Disinformation detection
+    └── zotero-nesy/     # Knowledge extraction for academic research
+----
+
+The division between "here" and "elsewhere" is explicit in the README. If a
+project uses LLM protocols (MCP, tool calling), it belongs in `poly-mcps`.
+If it is an AI-powered git tool, it belongs in `oikos`. Neural foundations
+only houses the underlying mechanisms — the conversation interface types, the
+reservoir computing implementations, the theorem-proving platform.
+
+=== Code path: conative-gating
+
+`conative-gating` (in `satellites/agentic/`) implements AI controlling AI
+with adversarial incentives: a second model trained with inverted reward
+signals — rewarded for blocking, suspicious by default — acts as a gate on
+the primary model's proposals. This is the "conative" (will/volition) layer
+above the "cognitive" (reasoning) layer. The gate is not a filter applied
+after decisions; it is a co-equal agent in the deliberation.
+
+=== Code path: ESN and LSM
+
+`satellites/neurosymbolic/esn/` is a Rust implementation of Echo State
+Networks — fixed random reservoirs where only the readout layer is trained.
+`satellites/neurosymbolic/lsm/` is a Rust implementation of Liquid State
+Machines (spiking neuron reservoirs). Both are zero-unsafe, benchmarked,
+and designed as drop-in components for any Rust codebase needing temporal
+pattern recognition without a full deep learning stack.
+
+=== Honest caveat
+
+"Neural foundations" is an aspirational scope statement as much as a
+description of current state. Several satellites are early-stage research
+sketches rather than production libraries. The `TOPOLOGY.md` document
+distinguishes complete satellites from work-in-progress by tier. An
+external reviewer should consult `TOPOLOGY.md` before assuming any given
+satellite is deployable.
+
+== Claim 2: "Echidna: multi-prover neurosymbolic theorem proving platform"
+
+[quote, README]
+____
+ECHIDNA — Extensible Cognitive Hybrid Intelligence for Deductive Neural
+Assistance. A neurosymbolic theorem proving platform that transforms Quill
+(Agda-only neural solver) into a universal multi-prover system.
+____
+
+=== How it works
+
+`satellites/neurosymbolic/echidna/` is a Rust project (Cargo workspace) with:
+
+* An `echidna` prover orchestration library
+* Language adapters for Coq, Lean 4, Agda, and Isabelle
+* Aspect tagging — annotating theorems with semantic categories
+* OpenCyc integration for common-sense ontology context
+* DeepProbLog probabilistic logic support
+
+`echidna` is also the backend for `gitbot-fleet/bots/echidnabot/` — the CI
+integration layer that verifies proofs on every push. The arXiv paper source
+is in `satellites/neurosymbolic/echidna/arcvix-neurosymbolic-theorem-proving.tex`.
+
+The API surface is in `satellites/neurosymbolic/echidna/api/`, which exposes
+a JSON HTTP interface that `echidnabot` calls for CI verification.
+
+=== Honest caveat
+
+Echidna is the most mature satellite. The multi-prover support is real.
+However, the OpenCyc integration and DeepProbLog support are partially
+implemented — the architecture is wired, the full ontology depth is not.
+The CHANGELOG and ROADMAP in the echidna directory document what is
+functional versus what is planned.
+
+== Dogfooded Across The Account
+
+[cols="1,2,2"]
+|===
+| Technology | Role in Neural Foundations | Also Used In
+
+| *Rust*
+| ESN, LSM, and echidna core implementations. Zero unsafe, benchmarked.
+| ephapax, verisimdb, gitbot-fleet, protocol-squisher
+
+| *ReScript*
+| Web visualisations and UIs for satellite tools
+| idaptik, panll, gossamer-powered SPAs, developer-ecosystem
+
+| *Deno*
+| Orchestration and API servers for foundation-model satellites
+| Universal across the account; llm-unify uses Deno for its API server
+
+| *Echidna* (this repo)
+| The theorem proving platform is developed here
+| gitbot-fleet/echidnabot (CI consumer), maa-framework/absolute-zero (proof
+verification), ephapax (Coq proofs verified by echidna)
+
+| *Hypatia*
+| Security and quality scanning of satellites
+| Every RSR repo in the account
+
+| *Stapeln containers*
+| `stapeln.toml` for satellite deployment
+| All containerised services in the account
+
+| *Contractile.just*
+| `contractile.just` — shared build recipes across satellites
+| Universal across hyperpolymath repos
+|===
 
 == File Map
 
-[cols="1,2"]
+[cols="1,3"]
 |===
-| Path | What's There
+| Path | What It Proves
 
-| `test(s)/` | Test suite
+| `satellites/foundation-models/llm-unify/`
+| Unified LLM conversation interface. Abstracts provider differences
+(OpenAI, Anthropic, Google) into a consistent API. The primary integration
+point for any repo that needs multi-provider LLM access.
+
+| `satellites/foundation-models/llm-unify-core/`
+| Shared type definitions used by llm-unify and any other consumer.
+`core` suffix means: types only, no side effects, no I/O.
+
+| `satellites/foundation-models/llm-antidote/`
+| Semantic reset artefacts — techniques for clearing, resetting, or
+redirecting LLM context. Useful when persistent context accumulates
+undesirable priors.
+
+| `satellites/foundation-models/patallm-gallery/`
+| Reference architectures and proven patterns for LLM integration. The
+pattern library for this ecosystem.
+
+| `satellites/agentic/conative-gating/`
+| Adversarial gating: a second AI model rewarded for blocking the first.
+The critical path for AI safety work in this account.
+
+| `satellites/agentic/elegant-state/`
+| Local-first state graph for multi-agent coordination. Agents share state
+without a central server.
+
+| `satellites/agentic/agentic-scm/`
+| Machine-readable agent behaviour and interaction patterns (A2ML format).
+
+| `satellites/neurosymbolic/echidna/`
+| Multi-prover theorem proving platform. `src/` is the Rust core. `api/`
+is the HTTP interface consumed by echidnabot. `arcvix-*.tex` is the paper
+source. Most mature satellite in the neurosymbolic cluster.
+
+| `satellites/neurosymbolic/esn/`
+| Echo State Networks in Rust. Fixed random reservoir, trained readout only.
+`benches/` covers time-series prediction throughput.
+
+| `satellites/neurosymbolic/lsm/`
+| Liquid State Machines (spiking neuron reservoirs) in Rust.
+
+| `satellites/neurosymbolic/neurophone/`
+| Android application: spiking NN + LLM on mobile. Combines ESN/LSM
+components with an on-device LLM for edge inference.
+
+| `satellites/neurosymbolic/disinfo-nesy-detector/`
+| Disinformation and AI-generated content detection using neurosymbolic
+techniques. Combines statistical and symbolic evidence.
+
+| `satellites/neurosymbolic/zotero-nesy/`
+| Knowledge extraction from Zotero academic libraries for neurosymbolic
+reasoning. Wittgenstein quote in the README is the design philosophy:
+only say what can be said clearly.
+
+| `satellites/neurosymbolic/neurosym-scm/`
+| Core neurosymbolic pattern definitions in A2ML format. Shared ontology
+for the neurosymbolic cluster.
+
+| `tests/`
+| Cross-satellite integration tests.
+
+| `.machine_readable/`
+| A2ML checkpoint files (STATE, META, ECOSYSTEM, AGENTIC, NEUROSYM, PLAYBOOK).
+Canonical AI session state.
+
+| `TOPOLOGY.md`
+| Visual map of satellites, their relationships, and completion status.
+The honest "what exists now" document.
 |===
 
 == Questions?
 
-Open an issue or reach out directly — happy to explain anything in more detail.
+Start with `TOPOLOGY.md` for the current state of each satellite. For the
+proving platform, start with `satellites/neurosymbolic/echidna/README.adoc`.
+For foundation model access, start with
+`satellites/foundation-models/llm-unify/`.
