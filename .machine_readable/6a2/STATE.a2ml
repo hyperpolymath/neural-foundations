@@ -5,10 +5,45 @@
 [metadata]
 project = "neural-foundations"
 version = "0.1.0"
-last-updated = "2026-03-15"
+last-updated = "2026-04-04"
 status = "active"
 
 [project-context]
 name = "neural-foundations"
-completion-percentage = 0
-phase = "In development"
+completion-percentage = 35
+phase = "CRG C test blitz in progress"
+
+[testing-status]
+# Updated 2026-04-04 by CRG C blitz session
+crg-target = "C"
+crg-current = "C (achieved this session)"
+
+[test-counts]
+# echidna satellite (neurosymbolic/echidna)
+echidna-unit-tests = 556
+echidna-new-e2e-tests = 29          # tests/e2e_proof_pipeline.rs
+echidna-new-property-tests = 31     # tests/neural_property_tests.rs
+echidna-new-security-tests = 32     # tests/security_aspect_tests.rs
+echidna-new-concurrency-tests = 27  # tests/concurrency_test.rs
+echidna-all-pass = true
+
+# llm-unify satellite (foundation-models/llm-unify-core)
+llm-unify-new-e2e-tests = 10        # crates/llm-unify-core/tests/e2e_routing_test.rs
+llm-unify-all-pass = true
+
+# New benchmarks
+echidna-new-benchmarks = "benches/routing_benchmarks.rs (7 benchmark groups)"
+
+[completed-this-session]
+e2e-proof-pipeline = "tests/e2e_proof_pipeline.rs — parse+dispatch+trust+graceful-failure"
+p2p-property-tests = "tests/neural_property_tests.rs — embedding/dispatch/trust/hash/axiom/prover properties"
+security-aspect-tests = "tests/security_aspect_tests.rs — forgery/injection/escalation/axiom/integrity"
+concurrency-tests = "tests/concurrency_test.rs — parallel factory/routing/trust/hash/agent/axiom/config"
+llm-unify-e2e = "crates/llm-unify-core/tests/e2e_routing_test.rs — routing/fallback/malformed/roundtrip"
+routing-benchmarks = "benches/routing_benchmarks.rs — latency/throughput/instantiation/planning"
+
+[next-actions]
+- "Agentic subsystem tests (elegant-state, conative-gating) — still untested"
+- "llm-antidote adversarial property tests (Julia replacement — blocked by Python ban)"
+- "Cross-satellite tests: echidna + llm-unify combined workflow"
+- "Fuzz harness replacement for tests/fuzz/placeholder.txt"

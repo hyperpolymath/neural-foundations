@@ -2,36 +2,41 @@
 
 > Generated 2026-03-29 by punishing audit.
 
-## Current State
+## Current State — Updated 2026-04-04
 
 | Category     | Count | Notes |
 |-------------|-------|-------|
 | Unit tests   | ~8    | echidna: test_agda_backend.rs, test_neural_integration.rs, ffi_integration_test.rs, prover tests (unified_test.ts, prover_test.ts). llm-antidote: test_suite.py |
 | Integration  | ~5    | echidna: integration_test.sh, Zig core_native_test.zig, integration_test.zig. llm-unify: e2e_test.sh |
-| E2E          | 1     | llm-unify e2e_test.sh |
-| Benchmarks   | 4     | echidna: proof_benchmarks.rs, benchmark.zig, overlay_benchmark.zig. llm-antidote: benchmark.py |
+| E2E          | 3     | llm-unify e2e_test.sh, echidna tests/e2e_proof_pipeline.rs (29 tests), llm-unify-core tests/e2e_routing_test.rs (10 tests) |
+| P2P/Property | 31    | echidna tests/neural_property_tests.rs — embedding/dispatch/trust/hash/axiom/prover |
+| Aspect       | 32    | echidna tests/security_aspect_tests.rs — forgery/injection/escalation/axiom/integrity |
+| Concurrency  | 27    | echidna tests/concurrency_test.rs — parallel factory/routing/trust/hash/agent/axiom |
+| Benchmarks   | 5     | echidna: proof_benchmarks.rs, routing_benchmarks.rs (7 groups), benchmark.zig, overlay_benchmark.zig. llm-antidote: benchmark.py |
 
 **Source modules:** ~337 across 3 satellite groups. neurosymbolic/echidna: ~104 Rust src + Idris2 ABI + Zig FFI + Julia. foundation-models: llm-antidote, llm-unify, llm-unify-core. agentic: elegant-state, conative-gating, agentic-scm.
 
-## What's Missing
+## What's Missing (Remaining After 2026-04-04 Session)
 
-### P2P (Property-Based) Tests
-- [ ] echidna proof engine: property tests for proof soundness (no invalid proof accepted)
-- [ ] Neural integration: property tests for embedding consistency
-- [ ] LLM antidote: adversarial input property tests
-- [ ] Prover backends: equivalence property tests across prover implementations
+### Completed in 2026-04-04 CRG C Blitz ✓
 
-### E2E Tests
-- [ ] echidna: full proof request -> prover selection -> proof generation -> verification
-- [ ] llm-unify: request -> routing -> model inference -> response normalization
-- [ ] agentic: agent lifecycle (create -> plan -> execute -> evaluate)
+- [x] echidna E2E: full proof request → prover selection → proof generation → verification (`tests/e2e_proof_pipeline.rs`)
+- [x] llm-unify E2E: request → routing → normalisation → fallback (`crates/llm-unify-core/tests/e2e_routing_test.rs`)
+- [x] P2P property tests: embedding, dispatch, trust monotonicity, hash stability, axiom ordering (`tests/neural_property_tests.rs`)
+- [x] Security aspect tests: forgery, injection, escalation, axiom sanitisation, integrity (`tests/security_aspect_tests.rs`)
+- [x] Concurrency tests: parallel factory, routing, trust, hashing, agent, axiom (`tests/concurrency_test.rs`)
+- [x] Routing benchmarks: decision latency, axiom throughput, trust computation, factory instantiation, agentic planning, BLAKE3 (`benches/routing_benchmarks.rs`)
+
+### Still Missing
+
+- [ ] Agentic E2E: agent lifecycle (create → plan → execute → evaluate) for elegant-state, conative-gating
+- [ ] LLM antidote adversarial property tests — NOTE: test_suite.py is semi-manual and Python (banned). Needs rewrite in Julia or Rust.
 - [ ] Cross-satellite: echidna proof + llm-unify inference in combined workflow
+- [ ] Fuzz harness: replace `tests/fuzz/placeholder.txt` with a real cargo-fuzz harness
 
-### Aspect Tests
-- **Security:** No tests for proof forgery, model injection in llm-unify, agent privilege escalation
-- **Performance:** Benchmarks exist for echidna (good) and llm-antidote. Missing: llm-unify latency, agentic execution time
-- **Concurrency:** No tests for parallel proof generation, concurrent model inference, agent contention
-- **Error handling:** No tests for prover timeout, model unavailability, malformed proof input, invalid agent state
+### P2P (Property-Based) Tests — Remaining
+- [ ] LLM antidote: adversarial input property tests (blocked: Python banned, needs Julia rewrite)
+- [ ] Prover backends: equivalence property tests across all 49 prover implementations (coverage increase)
 
 ### Build & Execution
 - [ ] `cargo test` for echidna Rust
