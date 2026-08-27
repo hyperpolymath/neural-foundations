@@ -7,13 +7,13 @@
 | Language/Tool | Use Case | Notes |
 |---------------|----------|-------|
 | **ReScript** | Primary application code | Compiles to JS, type-safe |
-| **Deno** | Runtime & package management | Replaces Node/npm/bun |
+| **Bun** | JS runtime & package management (tier 1) | Default for all new work. Runs compiled ESM/JS directly — no bundler step. Uses an npm-compatible `package.json` plus `bun.lock` — both are expected, not anti-patterns. |
 | **Rust** | Performance-critical, systems, WASM | Preferred for CLI tools |
 | **Tauri 2.0+** | Mobile apps (iOS/Android) | Rust backend + web UI |
 | **Dioxus** | Mobile apps (native UI) | Pure Rust, React-like |
 | **Gleam** | Backend services | Runs on BEAM or compiles to JS |
 | **Bash/POSIX Shell** | Scripts, automation | Keep minimal |
-| **JavaScript** | Only where ReScript cannot | MCP protocol glue, Deno APIs |
+| **JavaScript** | Only where AffineScript cannot | MCP protocol glue, Bun APIs |
 | **Nickel** | Configuration language | For complex configs |
 | **Guile Scheme** | State/meta files | .machine_readable/6a2/STATE.a2ml, .machine_readable/6a2/META.a2ml, .machine_readable/6a2/ECOSYSTEM.a2ml |
 | **Julia** | Batch scripts, data processing | Per RSR |
@@ -25,10 +25,10 @@
 | Banned | Replacement |
 |--------|-------------|
 | TypeScript | ReScript |
-| Node.js | Deno |
-| npm | Deno |
-| Bun | Deno |
-| pnpm/yarn | Deno |
+| Deno | Bun |
+| Node.js | Bun |
+| npm | Bun |
+| pnpm/yarn | Bun |
 | Go | Rust |
 | Python | Julia/Rust/ReScript |
 | Java/Kotlin | Rust/Tauri/Dioxus |
